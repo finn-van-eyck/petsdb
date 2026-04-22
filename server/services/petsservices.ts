@@ -17,6 +17,6 @@ export interface Pets {
 
 // Alle nieuwsartikelen ophalen
 export async function getAllPets(): Promise<Pets[]> {
-    const data : Pets[] = await sql`select * from news`;
+    const data : Pets[] = await sql`select * from owners`;
     return data;
 }
