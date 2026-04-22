@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import path from "path";
-import {Pets, getAllPets, getOnePet, saveAnimal } from "./services/petsservices";
+import {Pets, deleteAnimal, getAllPets, getOnePet, saveAnimal } from "./services/petsservices";
 import { renderFile } from "ejs";
 
 const router = express.Router();
@@ -31,4 +31,13 @@ router.post("/edit_owner/:id", async (req:Request, res:Response): Promise<void> 
      res.redirect('/')
 })
 
+/**
+ * DELETE REQUESTS
+ */
+
+router.delete("/edit_owner/:id", async(req:Request, res:Response): Promise<void> =>{
+     const id : number = parseInt(req.params.id as string);
+     deleteAnimal(id);
+     res.redirect('/')
+})
 export default router;

@@ -12,7 +12,6 @@ export interface Pets {
   city?: string;
   postal_code?: string;
   country?: string;
-
 }
 
 // Alle nieuwsartikelen ophalen
@@ -36,9 +35,16 @@ export async function saveAnimal(id:number, data:any): Promise<void> {
     email = ${data.email},
     street = ${data.email},
     number = ${data.number},
-    postal_code: ${data.postal_code},
-    city: ${data.city},
-    country: ${data.country} 
+    postal_code = ${data.postal_code},
+    city = ${data.city},
+    country = ${data.country} 
+    WHERE id = ${id}`;
+    
+}
+
+export async function deleteAnimal(id:number): Promise<void> {
+    await sql`
+    DELETE FROM owners
     WHERE id = ${id}`;
     
 }
