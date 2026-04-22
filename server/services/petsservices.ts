@@ -48,3 +48,10 @@ export async function deleteAnimal(id:number): Promise<void> {
     WHERE id = ${id}`;
     
 }
+
+export async function createAnimal(id:number, data:any): Promise<void> {
+    await sql`
+    INSERT INTO animals (firstname, lastname, email, street, number, city, postal_code , country)
+    VALUES (${data.firstname}, ${data.lastname}, ${data.email}, ${data.street}, ${data.number}, ${data.city}, ${data.postal_code}, ${data.country});`;
+    
+}

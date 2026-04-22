@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import path from "path";
-import {Pets, deleteAnimal, getAllPets, getOnePet, saveAnimal } from "./services/petsservices";
+import {Pets, createAnimal, deleteAnimal, getAllPets, getOnePet, saveAnimal } from "./services/petsservices";
 import { renderFile } from "ejs";
 
 const router = express.Router();
@@ -19,6 +19,12 @@ router.get("/edit_owner/:id", async (req: Request, res: Response): Promise<void>
     res.render("edit_owner", { Pets: pet, title: "Edit" });
 });
 
+router.get("/delete_owner/:id", async(req:Request, res:Response): Promise<void> =>{
+     const id : number = parseInt(req.params.id as string);
+     deleteAnimal(id);
+     res.redirect('/')
+})
+
 /**
  * POST REQUESTS
  */
@@ -31,13 +37,12 @@ router.post("/edit_owner/:id", async (req:Request, res:Response): Promise<void> 
      res.redirect('/')
 })
 
-/**
- * DELETE REQUESTS
- */
-
-router.delete("/edit_owner/:id", async(req:Request, res:Response): Promise<void> =>{
+router.post("/edit_owner/:id", async (req:Request, res:Response): Promise<void> => {
      const id : number = parseInt(req.params.id as string);
-     deleteAnimal(id);
+     const data:[] = req.body;
+     console.log(data);
+     createAnimal(id, data);
      res.redirect('/')
 })
+
 export default router;
