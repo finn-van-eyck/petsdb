@@ -16,6 +16,8 @@ app.set("views", path.join(__dirname, "views"));
 app.use(expressLayouts);
 app.set("layout", "layouts/main");
 
+app.use(express.urlencoded({ extended: true }));1
+
 app.use("/", routes);
 
 app.listen(PORT, () => {
